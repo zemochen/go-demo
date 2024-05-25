@@ -1,17 +1,17 @@
 syntax = "proto3";
 
-package pdapi;
+package pbapi;
 
-option go_package = "/pdapi";
+option go_package = "/pbapi";
 
-message Request{
-    string message = 1;
+message Request {
+  string message = 1;
 }
 
-message Response{
-    string message = 1;
+message Response {
+  string message = 1;
 }
 
-service EchoService {
-    rpc Echo(Request) returns (Response){};
+service Echo {
+  rpc Echo (Request) returns (Response) {}
 }

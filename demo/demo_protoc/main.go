@@ -8,8 +8,9 @@ import (
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/cloudwego/kitex/server"
 	kitexlogrus "github.com/kitex-contrib/obs-opentelemetry/logging/logrus"
+	consul "github.com/kitex-contrib/registry-consul"
 	"github.com/zemochen/go-demo/gomall/demo/demo_proto/conf"
-	"github.com/zemochen/go-demo/gomall/demo/demo_proto/kitex_gen/pdapi/echoservice"
+	"github.com/zemochen/go-demo/gomall/demo/demo_proto/kitex_gen/pbapi/echo"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
 )
@@ -17,7 +18,7 @@ import (
 func main() {
 	opts := kitexInit()
 
-	svr := echoservice.NewServer(new(EchoServiceImpl), opts...)
+	svr := echo.NewServer(new(EchoImpl), opts...)
 
 	err := svr.Run()
 	if err != nil {
@@ -37,6 +38,11 @@ func kitexInit() (opts []server.Option) {
 	opts = append(opts, server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{
 		ServiceName: conf.GetConf().Kitex.Service,
 	}))
+	r, err := consul.NewConsulRegister(conf.GetConf().Registry.RegistryAddress[0])
+	if err != nil {
+		klog.Fatal(err)
+	}
+	opts = append(opts, server.WithRegistry(r))
 
 	// klog
 	logger := kitexlogrus.NewLogger()

@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	pdapi "github.com/zemochen/go-demo/gomall/demo/demo_proto/kitex_gen/pdapi"
+	"github.com/zemochen/go-demo/gomall/demo/demo_proto/kitex_gen/pbapi"
 )
 
 type EchoService struct {
@@ -14,8 +14,7 @@ func NewEchoService(ctx context.Context) *EchoService {
 }
 
 // Run create note info
-func (s *EchoService) Run(req *pdapi.Request) (resp *pdapi.Response, err error) {
-	// Finish your business logic.
+func (s *EchoService) Run(req *pbapi.Request) (resp *pbapi.Response, err error) {
 
-	return &pdapi.Response{Message: req.Message}, nil
+	return &pbapi.Response{Message: req.Message}, nil
 }
