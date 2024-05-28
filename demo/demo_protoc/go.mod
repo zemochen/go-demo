@@ -7,6 +7,7 @@ replace github.com/apache/thrift => github.com/apache/thrift v0.13.0
 require (
 	github.com/cloudwego/fastpb v0.0.4
 	github.com/cloudwego/kitex v0.9.1
+	github.com/joho/godotenv v1.5.1
 	github.com/kitex-contrib/obs-opentelemetry/logging/logrus v0.0.0-20240515092919-1f776656cb66
 	github.com/kitex-contrib/registry-consul v0.0.0-20240508100819-2905e45155c1
 	github.com/kr/pretty v0.3.1
