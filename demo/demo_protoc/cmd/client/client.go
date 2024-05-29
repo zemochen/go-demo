@@ -15,6 +15,7 @@ import (
 	"github.com/zemochen/go-demo/gomall/demo/demo_proto/conf"
 	"github.com/zemochen/go-demo/gomall/demo/demo_proto/kitex_gen/pbapi"
 	"github.com/zemochen/go-demo/gomall/demo/demo_proto/kitex_gen/pbapi/echo"
+	"github.com/zemochen/go-demo/gomall/demo/demo_proto/middleware"
 )
 
 func main() {
@@ -26,6 +27,7 @@ func main() {
 		client.WithResolver(r),
 		client.WithTransportProtocol(transport.GRPC),
 		client.WithMetaHandler(transmeta.ClientHTTP2Handler),
+		client.WithMiddleware(middleware.Middleware),
 	)
 	if err != nil {
 		panic(err)
@@ -33,7 +35,7 @@ func main() {
 
 	ctx := metainfo.WithPersistentValue(context.Background(), "CLIENT_NAME", "demo_proto_client")
 
-	res, error := c.Echo(ctx, &pbapi.Request{Message: "error"})
+	res, error := c.Echo(ctx, &pbapi.Request{Message: "hello world"})
 	var bizErr *kerrors.GRPCBizStatusError
 	if error != nil {
 		ok := errors.As(error, &bizErr)
