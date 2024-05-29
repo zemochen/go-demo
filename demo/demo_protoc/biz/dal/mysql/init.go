@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/zemochen/go-demo/gomall/demo/demo_proto/biz/model"
 	"github.com/zemochen/go-demo/gomall/demo/demo_proto/conf"
 
 	"gorm.io/driver/mysql"
@@ -35,16 +36,17 @@ func Init() {
 		panic(err)
 	}
 
-	type Vsersion struct {
-		version string
+	type Version struct {
+		Version string
 	}
 
-	var v Vsersion
+	var v Version
 
 	err = DB.Raw("select version() as version").Scan(&v).Error
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(v)
+	DB.AutoMigrate(&model.User{})
+	fmt.Println("MYSQL Version:", v)
 	// fmt.Printf("%#v", DB.Debug().Exec("select version()"))
 }
