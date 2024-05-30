@@ -21,7 +21,7 @@ func NewEchoService(ctx context.Context) *EchoService {
 // Run create note info
 func (s *EchoService) Run(req *pbapi.Request) (resp *pbapi.Response, err error) {
 	clientName, ok := metainfo.GetPersistentValue(s.ctx, "CLIENT_NAME")
-	fmt.Println(clientName, ok)
+	fmt.Printf("clinet name: %s : %t\n", clientName, ok)
 	if req.Message == "error" {
 		return nil, kerrors.NewGRPCBizStatusError(1004001, "client param error")
 	}
