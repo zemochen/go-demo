@@ -1,0 +1,8 @@
+{
+    "[vue-html]": {
+        "editor.defaultFormatter": null
+    },
+    "conventionalCommits.scopes": [
+        "frontend"
+    ]
+}

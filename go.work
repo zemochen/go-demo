@@ -1,6 +1,7 @@
 go 1.20
 
 use (
+	./app/frontend
 	./demo/demo_protoc
 	./demo/demo_thrift
 )
