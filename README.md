@@ -6,6 +6,20 @@ This is a online mall demo build by golang. I build this for learn golang
 
 * docker
 
+## Common bash most used
+
+```bash
+
+### Makefile
+
+use makefile generate the project file,
+eg:
+generate `app/frontend`
+
+```bash
+make gen-frontend
+```
+
 ## Service Discovery
 
 ### Consul

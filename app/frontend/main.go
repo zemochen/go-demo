@@ -4,6 +4,7 @@ package main
 
 import (
 	"context"
+	"os"
 	"time"
 
 	"github.com/cloudwego/hertz/pkg/app"
@@ -17,6 +18,9 @@ import (
 	"github.com/hertz-contrib/logger/accesslog"
 	hertzlogrus "github.com/hertz-contrib/logger/logrus"
 	"github.com/hertz-contrib/pprof"
+	"github.com/hertz-contrib/sessions"
+	"github.com/hertz-contrib/sessions/redis"
+	"github.com/joho/godotenv"
 	"github.com/zemochen/go-demo/gomall/app/frontend/biz/router"
 	"github.com/zemochen/go-demo/gomall/app/frontend/conf"
 	"go.uber.org/zap/zapcore"
@@ -24,6 +28,11 @@ import (
 )
 
 func main() {
+	// load .env file
+	err := godotenv.Load()
+	if err != nil {
+		panic(err)
+	}
 	// init dal
 	// dal.Init()
 	address := conf.GetConf().Hertz.Address
@@ -41,10 +50,17 @@ func main() {
 	h.LoadHTMLGlob("template/*")
 	h.Static("/static", "./")
 
+	h.GET("/sign-in", func(c context.Context, ctx *app.RequestContext) {
+		ctx.HTML(consts.StatusOK, "sign-in", utils.H{"Title": "Sign In"})
+	})
 	h.Spin()
 }
 
 func registerMiddleware(h *server.Hertz) {
+	// redis
+	store, _ := redis.NewStore(10, "tcp", conf.GetConf().Redis.Address, "", []byte(os.Getenv("SESSION_SECRET")))
+	h.Use(sessions.New("gomal-shop", store))
+
 	// log
 	logger := hertzlogrus.NewLogger()
 	hlog.SetLogger(logger)
