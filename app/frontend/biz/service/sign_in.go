@@ -9,32 +9,26 @@ import (
 	common "github.com/zemochen/go-demo/gomall/app/frontend/hertz_gen/frontend/common"
 )
 
-type LoginService struct {
+type SignInService struct {
 	RequestContext *app.RequestContext
 	Context        context.Context
 }
 
-func NewLoginService(Context context.Context, RequestContext *app.RequestContext) *LoginService {
-	return &LoginService{RequestContext: RequestContext, Context: Context}
+func NewSignInService(Context context.Context, RequestContext *app.RequestContext) *SignInService {
+	return &SignInService{RequestContext: RequestContext, Context: Context}
 }
 
-func (h *LoginService) Run(req *auth.LoginReq) (resp *common.Empty, err error) {
+func (h *SignInService) Run(req *auth.SignInReq) (resp *common.Empty, err error) {
 	//defer func() {
 	// hlog.CtxInfof(h.Context, "req = %+v", req)
 	// hlog.CtxInfof(h.Context, "resp = %+v", resp)
 	//}()
-	//
+	// todo edit your code
 	session := sessions.Default(h.RequestContext)
 	session.Set("user_id", 1)
-	var count int
-	v := session.Get("count")
-	if v == nil {
-		count = 0
-	} else {
-		count = v.(int)
-		count++
-	}
-	session.Set("count", count)
+	session.Set("user_name", "test")
+	session.Set("user_email", "test@gomall.com")
 	session.Save()
+	// resp = &common.Empty{}
 	return
 }

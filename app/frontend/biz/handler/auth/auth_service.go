@@ -2,7 +2,6 @@ package auth
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
@@ -12,52 +11,49 @@ import (
 	common "github.com/zemochen/go-demo/gomall/app/frontend/hertz_gen/frontend/common"
 )
 
-// Login .
-// @router /auth/login [POST]
-func Login(ctx context.Context, c *app.RequestContext) {
+// SignIn .
+// @router /auth/sign-in [POST]
+func SignIn(ctx context.Context, c *app.RequestContext) {
 	var err error
-	var req auth.LoginReq
+	var req auth.SignInReq
 	err = c.BindAndValidate(&req)
 	if err != nil {
 		utils.SendErrResponse(ctx, c, consts.StatusOK, err)
 		return
 	}
 
-	resp, err := service.NewLoginService(ctx, c).Run(&req)
+	_, err = service.NewSignInService(ctx, c).Run(&req)
 	if err != nil {
 		utils.SendErrResponse(ctx, c, consts.StatusOK, err)
 		return
 	}
-	fmt.Printf("%v", resp)
-
 	c.Redirect(consts.StatusOK, []byte("/"))
 
 	// utils.SendSuccessResponse(ctx, c, consts.StatusOK, resp)
 }
 
-// Register .
-// @router /auth/register [POST]
-func Register(ctx context.Context, c *app.RequestContext) {
+// SignUp .
+// @router /auth/sign-up [POST]
+func SignUp(ctx context.Context, c *app.RequestContext) {
 	var err error
-	var req auth.RegisterReq
+	var req auth.SignUpReq
 	err = c.BindAndValidate(&req)
 	if err != nil {
 		utils.SendErrResponse(ctx, c, consts.StatusOK, err)
 		return
 	}
 
-	resp, err := service.NewRegisterService(ctx, c).Run(&req)
+	resp, err := service.NewSignUpService(ctx, c).Run(&req)
 	if err != nil {
 		utils.SendErrResponse(ctx, c, consts.StatusOK, err)
 		return
 	}
-
 	utils.SendSuccessResponse(ctx, c, consts.StatusOK, resp)
 }
 
-// Logout .
-// @router /auth/logout [POST]
-func Logout(ctx context.Context, c *app.RequestContext) {
+// SignOut .
+// @router /auth/sign-out [POST]
+func SignOut(ctx context.Context, c *app.RequestContext) {
 	var err error
 	var req common.Empty
 	err = c.BindAndValidate(&req)
@@ -66,11 +62,10 @@ func Logout(ctx context.Context, c *app.RequestContext) {
 		return
 	}
 
-	resp, err := service.NewLogoutService(ctx, c).Run(&req)
+	resp, err := service.NewSignOutService(ctx, c).Run(&req)
 	if err != nil {
 		utils.SendErrResponse(ctx, c, consts.StatusOK, err)
 		return
 	}
-
 	utils.SendSuccessResponse(ctx, c, consts.StatusOK, resp)
 }

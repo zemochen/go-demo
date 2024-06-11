@@ -7,26 +7,26 @@ option go_package = "frontend/auth";
 import "api.proto";
 import "frontend/common.proto";
 
-message LoginReq {
+message SignInReq {
    string email = 1 [(api.form)="email"];
    string password = 2 [(api.form)="password"];
    string next = 3 [(api.query)="next"];
 }
 
-message RegisterReq {
+message SignUpReq {
    string email = 1 [(api.form)="email"];
    string password = 2 [(api.form)="password"];
    string password_confirm = 3 [(api.form)="password_confirm"];
 }
 
 service AuthService {
-  rpc login(LoginReq) returns(common.Empty) {
-     option (api.post) = "/auth/login";
+  rpc signIn(SignInReq) returns(common.Empty) {
+     option (api.post) = "/auth/sign-in";
   }
-  rpc register(RegisterReq) returns(common.Empty) {
-   option (api.post) = "/auth/register";
+  rpc signUp(SignUpReq) returns(common.Empty) {
+   option (api.post) = "/auth/sign-up";
 }
-rpc logout(common.Empty) returns(common.Empty) {
-   option (api.post) = "/auth/logout";
+rpc signOut(common.Empty) returns(common.Empty) {
+   option (api.post) = "/auth/sign-out";
 }
 }

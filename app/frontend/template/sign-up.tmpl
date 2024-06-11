@@ -1,0 +1,80 @@
+
+{{define "sign-up"}}
+{{template "header" .}}
+<div class="modal modal-sheet position-static d-block bg-body-secondary p-4"
+  tabindex="-1" role="dialog" id="modalSignin">
+  <div class="modal-dialog" width="450" role="document">
+    <div class="modal-content rounded-4 shadow">
+      <div class="modal-header p-5 pb-4 border-bottom-0">
+        <h1 class="fw-bold mb-0 fs-2" data-relingo-block="true"
+          data-relin-paragraph="16">Sign up for free</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"
+          aria-label="Close" data-relingo-block="true"></button>
+      </div>
+
+      <div class="modal-body p-5 pt-0">
+        <form class method="post" action="/auth/sign-up">
+          <div class="form-floating mb-3">
+            <input type="email" name="email" class="form-control rounded-3"
+              id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput" data-relingo-block="true"
+              data-relin-paragraph="17">Email address</label>
+            <div data-lastpass-icon-root
+              style="position: relative !important; height: 0px !important; width: 0px !important; float: left !important;"
+              data-relingo-block="true">
+            </div>
+            </div>
+          <div class="form-floating mb-3">
+            <input type="password" name="password"
+              class="form-control rounded-3" id="floatingPassword"
+              placeholder="Password">
+            <label for="floatingPassword" data-relingo-block="true"
+              data-relin-paragraph="18">Password</label>
+            <div data-lastpass-icon-root
+              style="position: relative !important; height: 0px !important; width: 0px !important; float: left !important;"
+              data-relingo-block="true">
+            </div>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" name="PasswordConfirm"
+              class="form-control rounded-3" id="floatingPassword"
+              placeholder="Password">
+            <label for="floatingPassword" data-relingo-block="true"
+              data-relin-paragraph="18">Re-enter password</label>
+            <div data-lastpass-icon-root
+              style="position: relative !important; height: 0px !important; width: 0px !important; float: left !important;"
+              data-relingo-block="true">
+            </div>
+          </div>
+          <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary"
+            type="submit" data-relin-paragraph="21">Sign up</button>
+          <small class="text-body-secondary" data-relin-paragraph="22">By
+            clicking Sign up, you agree to the terms of use.</small>
+          <hr class="my-4" data-relingo-block="true">
+          <h2 class="fs-5 fw-bold mb-3" data-relingo-block="true"
+            data-relin-paragraph="19">Or use a third-party</h2>
+          <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3"
+            type="submit" data-relin-paragraph="23">
+            <svg class="bi me-1" width="16" height="16"><use
+                xlink:href="#twitter"></use></svg>
+            Sign up with Twitter
+          </button>
+          <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-3"
+            type="submit" data-relin-paragraph="24">
+            <svg class="bi me-1" width="16" height="16"><use
+                xlink:href="#facebook"></use></svg>
+            Sign up with Facebook
+          </button>
+          <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3"
+            type="submit" data-relin-paragraph="25">
+            <svg class="bi me-1" width="16" height="16"><use
+                xlink:href="#github"></use></svg>
+            Sign up with GitHub
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{template "footer" .}}
+{{end}}
