@@ -2,13 +2,13 @@ package auth
 
 import (
 	"bytes"
+	"fmt"
 	"testing"
 
 	"github.com/cloudwego/hertz/pkg/app/server"
 	//"github.com/cloudwego/hertz/pkg/common/test/assert"
 	"github.com/cloudwego/hertz/pkg/common/ut"
 )
-
 
 func TestSignIn(t *testing.T) {
 	h := server.Default()
@@ -24,6 +24,7 @@ func TestSignIn(t *testing.T) {
 	// assert.DeepEqual(t, 200, resp.StatusCode())
 	// assert.DeepEqual(t, "null", string(resp.Body()))
 }
+
 func TestSignUp(t *testing.T) {
 	h := server.Default()
 	h.POST("/auth/sign-up", SignUp)
@@ -38,6 +39,7 @@ func TestSignUp(t *testing.T) {
 	// assert.DeepEqual(t, 200, resp.StatusCode())
 	// assert.DeepEqual(t, "null", string(resp.Body()))
 }
+
 func TestSignOut(t *testing.T) {
 	h := server.Default()
 	h.POST("/auth/sign-out", SignOut)

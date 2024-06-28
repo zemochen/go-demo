@@ -53,13 +53,19 @@ func main() {
 	h.GET("/sign-in", func(c context.Context, ctx *app.RequestContext) {
 		ctx.HTML(consts.StatusOK, "sign-in", utils.H{"Title": "Sign In"})
 	})
+	h.GET("/sign-up", func(c context.Context, ctx *app.RequestContext) {
+		ctx.HTML(consts.StatusOK, "sign-up", utils.H{"Title": "Sign Up"})
+	})
 	h.Spin()
 }
 
 func registerMiddleware(h *server.Hertz) {
 	// redis
-	store, _ := redis.NewStore(10, "tcp", conf.GetConf().Redis.Address, "", []byte(os.Getenv("SESSION_SECRET")))
-	h.Use(sessions.New("gomal-shop", store))
+	store, err := redis.NewStore(10, "tcp", conf.GetConf().Redis.Address, "", []byte(os.Getenv("SESSION_SECRET")))
+	if err != nil {
+		panic(err)
+	}
+	h.Use(sessions.New("gomall-shop", store))
 
 	// log
 	logger := hertzlogrus.NewLogger()
