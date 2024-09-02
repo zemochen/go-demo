@@ -25,8 +25,9 @@ func (h *SignInService) Run(req *auth.SignInReq) (resp *common.Empty, err error)
 	//}()
 	// todo edit your code
 	session := sessions.Default(h.RequestContext)
+
 	session.Set("user_id", 1)
-	session.Set("user_name", "test")
+	session.Set("name", "test")
 	session.Set("user_email", "test@gomall.com")
 	session.Save()
 	// resp = &common.Empty{}

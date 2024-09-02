@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/cloudwego/hertz/pkg/app"
+	"github.com/hertz-contrib/sessions"
 	common "github.com/zemochen/go-demo/gomall/app/frontend/hertz_gen/frontend/common"
 )
 
@@ -22,5 +23,10 @@ func (h *SignOutService) Run(req *common.Empty) (resp *common.Empty, err error) 
 	// hlog.CtxInfof(h.Context, "resp = %+v", resp)
 	//}()
 	// todo edit your code
+	session := sessions.Default(h.RequestContext)
+
+	session.Clear()
+	session.Save()
+
 	return
 }

@@ -43,12 +43,13 @@ func SignUp(ctx context.Context, c *app.RequestContext) {
 		return
 	}
 
-	resp, err := service.NewSignUpService(ctx, c).Run(&req)
+	_, err = service.NewSignUpService(ctx, c).Run(&req)
 	if err != nil {
 		utils.SendErrResponse(ctx, c, consts.StatusOK, err)
 		return
 	}
-	utils.SendSuccessResponse(ctx, c, consts.StatusOK, resp)
+	// utils.SendSuccessResponse(ctx, c, consts.StatusOK, resp)
+	c.Redirect(consts.StatusOK, []byte("/"))
 }
 
 // SignOut .
@@ -62,10 +63,12 @@ func SignOut(ctx context.Context, c *app.RequestContext) {
 		return
 	}
 
-	resp, err := service.NewSignOutService(ctx, c).Run(&req)
+	_, err = service.NewSignOutService(ctx, c).Run(&req)
 	if err != nil {
 		utils.SendErrResponse(ctx, c, consts.StatusOK, err)
 		return
 	}
-	utils.SendSuccessResponse(ctx, c, consts.StatusOK, resp)
+	// utils.SendSuccessResponse(ctx, c, consts.StatusOK, resp)
+	c.Redirect(consts.StatusOK, []byte("/"))
+
 }

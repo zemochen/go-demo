@@ -17,5 +17,6 @@ import (
 func Register(r *server.Hertz) {
 
 	root := r.Group("/", rootMw()...)
+	root.GET("", append(_homeMw(), home.Home)...)
 	root.GET("/home", append(_homeMw(), home.Home)...)
 }
