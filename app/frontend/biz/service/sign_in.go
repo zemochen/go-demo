@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"log"
 
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/hertz-contrib/sessions"
@@ -30,6 +31,7 @@ func (h *SignInService) Run(req *auth.SignInReq) (resp *common.Empty, err error)
 	session.Set("name", "test")
 	session.Set("user_email", "test@gomall.com")
 	session.Save()
+	log.Println("SignIn:save session")
 	// resp = &common.Empty{}
 	return
 }

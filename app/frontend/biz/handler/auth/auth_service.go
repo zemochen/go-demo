@@ -2,6 +2,7 @@ package auth
 
 import (
 	"context"
+	"log"
 
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
@@ -22,6 +23,7 @@ func SignIn(ctx context.Context, c *app.RequestContext) {
 		return
 	}
 
+	log.Println("SignIn:")
 	_, err = service.NewSignInService(ctx, c).Run(&req)
 	if err != nil {
 		utils.SendErrResponse(ctx, c, consts.StatusOK, err)
@@ -70,5 +72,4 @@ func SignOut(ctx context.Context, c *app.RequestContext) {
 	}
 	// utils.SendSuccessResponse(ctx, c, consts.StatusOK, resp)
 	c.Redirect(consts.StatusOK, []byte("/"))
-
 }
