@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"log"
 
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/hertz-contrib/sessions"
@@ -26,7 +27,12 @@ func (h *SignOutService) Run(req *common.Empty) (resp *common.Empty, err error) 
 	session := sessions.Default(h.RequestContext)
 
 	session.Clear()
-	session.Save()
-
+	err = session.Save()
+	if err != nil {
+		log.Println("SignOutService:save session error")
+		return nil, err
+	} else {
+		log.Println("SignOutService:save session")
+	}
 	return
 }

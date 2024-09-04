@@ -30,8 +30,13 @@ func (h *SignInService) Run(req *auth.SignInReq) (resp *common.Empty, err error)
 	session.Set("user_id", 1)
 	session.Set("name", "test")
 	session.Set("user_email", "test@gomall.com")
-	session.Save()
-	log.Println("SignIn:save session")
+	err = session.Save()
+	if err != nil {
+		log.Println("SignIn:save session error")
+		return nil, err
+	} else {
+		log.Println("SignIn:save session")
+	}
 	// resp = &common.Empty{}
 	return
 }
